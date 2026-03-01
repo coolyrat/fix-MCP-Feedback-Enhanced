@@ -459,6 +459,11 @@ async def interactive_feedback(
     Returns:
         list: List containing TextContent and MCPImage objects representing user feedback
     """
+    DEFAULT_TIMEOUT = 604800
+    if timeout != DEFAULT_TIMEOUT:
+        debug_log(f"忽略 Model 傳入的 timeout={timeout}，強制使用預設值 {DEFAULT_TIMEOUT}")
+        timeout = DEFAULT_TIMEOUT
+
     # 環境偵測
     is_remote = is_remote_environment()
     is_wsl = is_wsl_environment()
